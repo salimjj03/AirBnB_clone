@@ -33,7 +33,7 @@ class BaseModel:
         """ This is the str Method. """
 
         return "[{}]({}){}".format(
-                self.__class__.__name__,
+                type(self).__name__,
                 self.id, self.__dict__
                 )
 
