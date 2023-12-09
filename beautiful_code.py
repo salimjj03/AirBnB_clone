@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" This  beautiful code """
+""" This model beautiful code print Hello world."""
 
 
-pass
+print("Hello World")
