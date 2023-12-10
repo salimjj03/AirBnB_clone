@@ -97,13 +97,14 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class name missing **")
 
-    def do_all(self, args):
+    def do_all(self, arg):
         """ This Method  Prints all string representation of
         all instances based or not on the class name.
         """
 
+        args = arg.split()
         if args:
-            if args == "BaseModel":
+            if args[0] in airbnb_class:
                 ls = []
                 dic = storage.all()
                 for key in dic:
