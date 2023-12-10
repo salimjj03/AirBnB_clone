@@ -4,6 +4,7 @@ of the command interpreter.
 
 """
 
+import sys
 import cmd
 from models.base_model import BaseModel
 from models import storage
@@ -142,4 +143,10 @@ class HBNBCommand(cmd.Cmd):
 
 
 if __name__ == '__main__':
-    HBNBCommand().cmdloop()
+    if sys.stdin.isatty():
+        HBNBCommand().cmdloop()
+    else:
+        for line in sys.stdin:
+            print("(hbnb) ")
+            HBNBCommand().onecmd(line.strip())
+            print("(hbnb) ")
