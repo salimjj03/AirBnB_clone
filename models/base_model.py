@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ This is the class BaseModel that defines all common
-    attributes/methods for other classes.
-    """
+attributes/methods for other classes.
+"""
 
 
 import uuid
@@ -10,10 +10,10 @@ import models
 
 
 class BaseModel:
-    """ This is the Base class. """
+    """ This is the Base class that does alot."""
 
     def __init__(self, *args, **kwargs):
-        """ This method Public instance attributes. """
+        """ This method Public instance attributes."""
 
         if kwargs:
             for key, value in kwargs.items():
@@ -30,7 +30,7 @@ class BaseModel:
             models.storage.new(self)
 
     def __str__(self):
-        """ This is the str Method. """
+        """ This is the str Method that return str representaton."""
 
         return "[{}]({}){}".format(
                 self.__class__.__name__,
