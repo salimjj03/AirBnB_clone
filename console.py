@@ -97,20 +97,20 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class name missing **")
 
-    def do_all(self, arg):
+    def do_all(self, args):
         """ This Method  Prints all string representation of
         all instances based or not on the class name.
         """
 
-        args = arg.split()
-        if args[0] in airbnb_class:
-            ls = []
-            dic = storage.all()
-            for key in dic:
-                ls.append(dic[key].__str__())
-            print(ls)
-        else:
-            print("** class doesn't exist **")
+        if args:
+            if args == "BaseModel":
+                ls = []
+                dic = storage.all()
+                for key in dic:
+                    ls.append(dic[key].__str__())
+                print(ls)
+            else:
+                print("** class doesn't exist **")
 
     def do_update(self, arg):
         """ This Method Updates an instance based on the class name
