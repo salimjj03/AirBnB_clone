@@ -138,6 +138,8 @@ class HBNBCommand(cmd.Cmd):
                 name = args[2]
                 if args[3][0] == '"':
                     setattr(obj, args[2], args[3][1:-1])
+                elif args[3][0] != '"' and "." in args[3]:
+                    setattr(obj, args[2], float(args[3]))
                 else:
                     setattr(obj, args[2], int(args[3]))
                 storage.save()
