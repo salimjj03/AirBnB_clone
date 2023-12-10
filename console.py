@@ -7,7 +7,11 @@ of the command interpreter.
 import sys
 import cmd
 from models.base_model import BaseModel
+from models.user import User
 from models import storage
+
+
+airbnb_class = ["BaseModel", "User"]
 
 
 class HBNBCommand(cmd.Cmd):
@@ -33,75 +37,73 @@ class HBNBCommand(cmd.Cmd):
 
         pass
 
-    def do_create(self, args):
+    def do_create(self, arg):
         """ Creates a new instance of BaseModel, saves
         it (to the JSON file) and prints the id.
         """
 
-        if args and args == "BaseModel":
-            obj = BaseModel()
-            obj.save()
+        args = arg.split()
+        if args:
+            if args[0] not in airbnb_class:
+                print("** class doesn't exist **")
+            else:
+                class_ = globals()[args[0]]
+                obj = class_()
+                obj.save()
             print(obj.id)
-        elif args:
-            print("** class doesn't exist **")
         else:
             print("** class name missing **")
 
-    def do_show(self, args):
+    def do_show(self, arg):
         """ Prints the string representation of an
         instance based on the class name and id.
         """
 
+        args = arg.split()
         if args:
-            if args[:9] == "BaseModel":
-                try:
-                    class_n, c_id = args.split(" ")
-                except Exception:
-                    print("** instance id missing **")
-                else:
-                    if class_n == "BaseModel":
-                        dic = storage.all()
-                        key = ".".join([class_n, c_id])
-                        if key in dic:
-                            print(dic[key])
-                        else:
-                            print("** no instance found **")
-            else:
+            if args[0] not in airbnb_class:
                 print("** class doesn't exist **")
+            elif len(args) == 1:
+                print("** instance id missing **")
+            else:
+                dic = storage.all()
+                key = ".".join([args[0], args[1]])
+                if key in dic:
+                    print(dic[key])
+                else:
+                    print("** no instance found **")
         else:
             print("** class name missing **")
 
-    def do_destroy(self, args):
+    def do_destroy(self, arg):
         """ This Method  Deletes an instance based on
         the class name and id (save the change into the JSON file).
         """
 
+        args = arg.split()
         if args:
-            if args[:9] == "BaseModel":
-                try:
-                    class_n, c_id = args.split(" ")
-                except Exception:
-                    print("** instance id missing **")
-                else:
-                    if class_n == "BaseModel":
-                        dic = storage.all()
-                        key = ".".join([class_n, c_id])
-                        if key in dic:
-                            del dic[key]
-                            storage.save()
-                        else:
-                            print("** no instance found **")
-            else:
+            if args[0] not in airbnb_class:
                 print("** class doesn't exist **")
+            elif len(args) == 1:
+                print("** instance id missing **")
+            else:
+                dic = storage.all()
+                key = ".".join([args[0], args[1]])
+                if key in dic:
+                    del dic[key]
+                    storage.save()
+                else:
+                    print("** no instance found **")
         else:
             print("** class name missing **")
 
-    def do_all(self, args):
+    def do_all(self, arg):
         """ This Method  Prints all string representation of
         all instances based or not on the class name.
         """
 
-        if args == "BaseModel":
+        args = arg.split()
+        if args[0] in airbnb_class:
             ls = []
             dic = storage.all()
             for key in dic:
@@ -118,7 +120,7 @@ class HBNBCommand(cmd.Cmd):
 
         args = arg.split()
         if args:
-            if args[0] != "BaseModel":
+            if args[0] not in airbnb_class:
                 print("** class doesn't exist **")
             elif len(args) == 1:
                 print("** instance id missing **")
@@ -134,9 +136,9 @@ class HBNBCommand(cmd.Cmd):
                 obj = dic[key]
                 name = args[2]
                 if args[3][0] == '"':
-                    obj.name = args[3][1:-1]
+                    setattr(obj, args[2], args[3][1:-1])
                 else:
-                    obj.name = int(args[3])
+                    setattr(obj, args[2], int(args[3]))
                 storage.save()
         else:
             print("** class name missing **")
