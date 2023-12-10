@@ -132,7 +132,10 @@ class HBNBCommand(cmd.Cmd):
                 key = "{}.{}".format(args[0], args[1])
                 obj = dic[key]
                 name = args[2]
-                obj.name = args[3]
+                if args[3][0] == '"'
+                    obj.name = str(args[3])
+                else:
+                     obj.name = int(args[3])
                 storage.save()
         else:
             print("** class name missing **")
