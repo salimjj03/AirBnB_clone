@@ -15,8 +15,3 @@ from models.review import Review
 class Test_baseclass(unittest.TestCase):
     """ This is the test model for BaseModel."""
 
-    pass
-
-
-if __name__ == "__main__":
-    unittest.testmode()
