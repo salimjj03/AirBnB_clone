@@ -133,7 +133,7 @@ class HBNBCommand(cmd.Cmd):
                 obj = dic[key]
                 name = args[2]
                 if args[3][0] == '"':
-                    obj.name = str(args[3])
+                    obj.name = args[3][1:-1]
                 else:
                     obj.name = int(args[3])
                 storage.save()
