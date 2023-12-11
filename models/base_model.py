@@ -32,7 +32,7 @@ class BaseModel:
     def __str__(self):
         """ This is the str Method that return str representaton."""
 
-        return "[{}]({}){}".format(
+        return "[{}] ({}) {}".format(
                 self.__class__.__name__,
                 self.id, self.__dict__
                 )
