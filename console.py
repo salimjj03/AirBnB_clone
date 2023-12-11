@@ -57,7 +57,7 @@ class HBNBCommand(cmd.Cmd):
                 class_ = globals()[args[0]]
                 obj = class_()
                 obj.save()
-            print(obj.id)
+                print(obj.id)
         else:
             print("** class name missing **")
 
@@ -119,6 +119,12 @@ class HBNBCommand(cmd.Cmd):
                 print(ls)
             else:
                 print("** class doesn't exist **")
+        else:
+            ls = []
+            dic = storage.all()
+            for key in dic:
+                ls.append(dic[key].__str__())
+            print(ls)
 
     def do_update(self, arg):
         """ This Method Updates an instance based on the class name
