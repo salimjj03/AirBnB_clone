@@ -15,10 +15,11 @@ class Test_Storoge(unittest.TestCase):
         the base model.
         """
 
-        obj = FileStorage()
+        storage = FileStorage()
+        obj = BaseModel()
         obj.save()
-        self.assertIsInstance(obj, FileStorage)
-        obj_dict = models.storage.all()
+        self.assertIsInstance(obj, BaseModel)
+        obj_dict = storage.all()
         self.assertIsInstance(obj_dict, dict)
         self.assertIn("BaseModel.{}".format(obj.id), obj_dict)
 
@@ -28,9 +29,10 @@ class Test_Storoge(unittest.TestCase):
         """
 
         obj = BaseModel()
-        models.storage.new(obj)
-        models.storage.save()
-        dic = models.storage.all()
+        storage = FileStorage()
+        storage.new(obj)
+        storage.save()
+        dic = storage.all()
         self.assertIn("BaseModel.{}".format(obj.id), dic)
 
     def test_new(self):
@@ -39,8 +41,9 @@ class Test_Storoge(unittest.TestCase):
         """
 
         obj = BaseModel()
-        models.storage.new(obj)
-        dic = models.storage.all()
+        storage = FileStorage()
+        storage.new(obj)
+        dic = storage.all()
         self.assertIn("BaseModel.{}".format(obj.id), dic)
 
     def test_reload(self):
@@ -49,8 +52,9 @@ class Test_Storoge(unittest.TestCase):
         """
 
         obj = BaseModel()
-        models.storage.new(obj)
-        models.storage.save()
-        models.storage.reload()
-        dic = models.storage.all()
+        storage = FileStorage()
+        storage.new(obj)
+        storage.save()
+        storage.reload()
+        dic = storage.all()
         self.assertIn("BaseModel.{}".format(obj.id), dic)
