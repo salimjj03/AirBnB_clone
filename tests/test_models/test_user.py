@@ -1,16 +1,16 @@
 #!/usr/bin/python3
-""" This is the test module for Base model. """
+""" This is the test module for User model. """
 
 import unittest
 from models.user import User
 
 
-class Test_Storoge(unittest.TestCase):
+class TestUser(unittest.TestCase):
     """ This class test The base Model."""
 
     def test_instance(self):
         """ This method test the instance of
-        the base model.
+        the user model.
         """
 
         obj = User()
@@ -18,7 +18,7 @@ class Test_Storoge(unittest.TestCase):
 
     def test_attribute(self):
         """ This method test the string representation of
-        the base model.
+        the user model.
         """
 
         obj = User()
@@ -35,7 +35,7 @@ class Test_Storoge(unittest.TestCase):
 
     def test_value(self):
         """ This method test the attributes of
-        the base model.
+        the user model.
         """
 
         obj = User()
