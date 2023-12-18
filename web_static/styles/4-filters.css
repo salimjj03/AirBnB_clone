@@ -19,3 +19,7 @@
 	right: 30px;
 	top: 12px;
 }
+
+button:hover {
+    opacity: 90%;
+}
